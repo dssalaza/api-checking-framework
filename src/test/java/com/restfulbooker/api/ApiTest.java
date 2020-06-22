@@ -2,6 +2,8 @@ package com.restfulbooker.api;
 
 import com.restfulbooker.api.payloads.request.AuthPayload;
 import com.restfulbooker.api.payloads.request.BookingPayload;
+import com.restfulbooker.api.payloads.response.AuthResponse;
+import com.restfulbooker.api.requests.Auth;
 import com.restfulbooker.api.requests.Booking;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
@@ -67,7 +69,9 @@ public class ApiTest {
                 .setPassword("password123")
                 .build();
 
+ResponseEntity<AuthResponse> authResponse = Auth.postAuth(authPayload){
 
+        }
 
     }
 
