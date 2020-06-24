@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 
+import java.sql.SQLOutput;
 import java.util.Date;
 
 import static junit.framework.TestCase.assertEquals;
@@ -84,7 +85,12 @@ public class ApiTest {
 
         ResponseEntity<AuthResponse> authResponse = Auth.postAuth(authPayload);
 
-        System.out.println(createdBookingResponse.getBody().getBookingid());
+        int id = createdBookingResponse.getBody().getBookingid();
+        String token = authResponse.getBody().getToken();
+
+
+        ResponseEntity<String> deleteResponse = Booking.deleteBooking(id, token);
+        assertThat(deleteResponse.getStatusCode(), is(HttpStatus.CREATED));
 
     }
 

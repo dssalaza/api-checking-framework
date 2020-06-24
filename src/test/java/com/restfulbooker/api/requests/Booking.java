@@ -35,4 +35,13 @@ public class Booking {
         return restTemplate.exchange("http://localhost:3001/booking", HttpMethod.POST, httpEntity, BookingResponse.class);
     }
 
+    public static ResponseEntity<String> deleteBooking(int id, String tokenValue) {
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.set("Cookie","token=" + tokenValue);
+
+        HttpEntity<String> httpEntity = new HttpEntity<String>(requestHeaders);
+
+        return restTemplate.exchange("http://localhost:3001/booking/" + Integer.toString(id), HttpMethod.DELETE, httpEntity, String.class);
+    }
+
 }
