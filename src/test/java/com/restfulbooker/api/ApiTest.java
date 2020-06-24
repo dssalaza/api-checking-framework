@@ -88,7 +88,6 @@ public class ApiTest {
         int id = createdBookingResponse.getBody().getBookingid();
         String token = authResponse.getBody().getToken();
 
-
         ResponseEntity<String> deleteResponse = Booking.deleteBooking(id, token);
         assertThat(deleteResponse.getStatusCode(), is(HttpStatus.CREATED));
 
