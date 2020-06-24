@@ -1,6 +1,7 @@
 package com.restfulbooker.api.requests;
 
 import com.restfulbooker.api.payloads.request.BookingPayload;
+import com.restfulbooker.api.payloads.response.BookingResponse;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -24,14 +25,14 @@ public class Booking {
         return restTemplate.exchange("http://localhost:3001/booking/" + Integer.toString(id), HttpMethod.GET , httpEntity , String.class);
     }
 
-    public static ResponseEntity<String> postBooking(BookingPayload payload){
+    public static ResponseEntity<BookingResponse> postBooking(BookingPayload payload) {
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.setContentType(MediaType.APPLICATION_JSON);
         requestHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
         HttpEntity<BookingPayload> httpEntity = new HttpEntity<BookingPayload>(payload, requestHeaders);
 
-        return restTemplate.exchange("http://localhost:3001/booking", HttpMethod.POST, httpEntity, String.class);
+        return restTemplate.exchange("http://localhost:3001/booking", HttpMethod.POST, httpEntity, BookingResponse.class);
     }
 
 }

@@ -3,6 +3,7 @@ package com.restfulbooker.api;
 import com.restfulbooker.api.payloads.request.AuthPayload;
 import com.restfulbooker.api.payloads.request.BookingPayload;
 import com.restfulbooker.api.payloads.response.AuthResponse;
+import com.restfulbooker.api.payloads.response.BookingResponse;
 import com.restfulbooker.api.requests.Auth;
 import com.restfulbooker.api.requests.Booking;
 import org.junit.Test;
@@ -54,24 +55,36 @@ public class ApiTest {
                 .setDepositpaid(true)
                 .setCheckin(new Date())
                 .setCheckout(new Date())
-                .setAdditionalneeds("none")
+                .setAdditionalneeds("None")
                 .build();
 
-        ResponseEntity<String> response = Booking.postBooking(payload);
+        ResponseEntity<BookingResponse> response = Booking.postBooking(payload);
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
     }
 
     @Test
     public void deleteBookingReturns201(){
 
+        BookingPayload payload = new BookingPayload.BookingPayloadBuilder()
+                .setFirstname("Mary")
+                .setLastname("White")
+                .setTotalprice(200)
+                .setDepositpaid(true)
+                .setCheckin(new Date())
+                .setCheckout(new Date())
+                .setAdditionalneeds("None")
+                .build();
+
+        ResponseEntity<BookingResponse> createdBookingResponse = Booking.postBooking(payload);
+
         AuthPayload authPayload = new AuthPayload.AuthPayloadBuilder()
                 .setUsername("admin")
                 .setPassword("password123")
                 .build();
 
-ResponseEntity<AuthResponse> authResponse = Auth.postAuth(authPayload){
+        ResponseEntity<AuthResponse> authResponse = Auth.postAuth(authPayload);
 
-        }
+        System.out.println(createdBookingResponse.getBody().getBookingid());
 
     }
 

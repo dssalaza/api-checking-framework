@@ -1,6 +1,6 @@
 package com.restfulbooker.api.payloads.response;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AuthResponse {
 
